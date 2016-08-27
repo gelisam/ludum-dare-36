@@ -1,0 +1,15 @@
+{
+    "version": "1.0.0",
+    "summary": "My entry for Ludum Dare 36, theme was \"Ancient Technology\"",
+    "repository": "https://github.com/gelisam/ludum-dare-36.git",
+    "license": "CC0",
+    "source-directories": [
+        "src"
+    ],
+    "exposed-modules": [],
+    "dependencies": {
+        "elm-lang/core": "4.0.5 <= v < 5.0.0",
+        "elm-lang/html": "1.1.0 <= v < 2.0.0"
+    },
+    "elm-version": "0.17.1 <= v < 0.18.0"
+}
