@@ -5,13 +5,14 @@ import Html exposing (Html)
 import Html.App as App
 import Html.Attributes as Html
 
-import CommentSchedule
+import Comments
+import CommentSchedule exposing (Event)
 import Game
 
 
 type alias Model =
   { game : Game.Model
-  , comments : List String
+  , comments : Comments.Model
   }
 
 type Msg
@@ -21,14 +22,28 @@ type Msg
 init : Model
 init =
   { game = Game.init 1
-  , comments = []
+  , comments = Comments.init
   }
+
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
     Game gameMsg ->
-      { model | game = Game.update gameMsg model.game }
+      let
+        game = model.game
+        game' = Game.update gameMsg game
+      in
+        { model
+        | game = game'
+        , comments = Comments.update (detectEvent game game') model.comments
+        }
+
+detectEvent : Game.Model -> Game.Model -> Event -> Bool
+detectEvent _ _ _ =
+  -- TODO
+  False
+
 
 view : Model -> Html Msg
 view model =
@@ -46,12 +61,7 @@ view model =
       ]
     [ App.map Game <| Game.view model.game
     ]
-  , Html.div
-      [ Html.style
-        [ ("margin", "1em")
-        ]
-      ]
-    <| List.map Html.text model.comments
+  , Comments.view model.comments
 
   -- DEBUG
   , Html.hr [] []
