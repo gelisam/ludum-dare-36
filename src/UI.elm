@@ -8,6 +8,7 @@ import Html.Attributes as Html
 import Comments
 import CommentSchedule exposing (Event)
 import Game
+import PrettyPrint
 
 
 type alias Model =
@@ -65,7 +66,7 @@ view model =
 
   -- DEBUG
   , Html.hr [] []
-  , Html.text (toString model)
+  , PrettyPrint.view model
   ]
 
 
