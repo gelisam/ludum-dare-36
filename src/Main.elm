@@ -1,9 +1,18 @@
 module Main exposing (main)
 
-import Html exposing (Html)
+import Html.App as App
 
-import CommentBox
+import UI
 
 
-main : Html ()
-main = Html.text "Hello"
+-- This fails at runtime. Elm bug?
+--main : Program Never
+--main = UI.main
+
+main : Program Never
+main =
+  App.beginnerProgram
+  { model = UI.init
+  , view = UI.view
+  , update = UI.update
+  }
