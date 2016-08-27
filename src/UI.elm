@@ -20,23 +20,15 @@ type Msg
 
 init : Model
 init =
-  let
-    game = Game.init 1
-  in
-    { game = game
-    , comments = [toString game]
-    }
+  { game = Game.init 1
+  , comments = []
+  }
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
     Game gameMsg ->
-      let
-        game' = Game.update gameMsg model.game
-      in
-        { game = game'
-        , comments = [toString game']
-        }
+      { model | game = Game.update gameMsg model.game }
 
 view : Model -> Html Msg
 view model =
@@ -60,6 +52,10 @@ view model =
         ]
       ]
     <| List.map Html.text model.comments
+
+  -- DEBUG
+  , Html.hr [] []
+  , Html.text (toString model)
   ]
 
 
