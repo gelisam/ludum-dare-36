@@ -51,19 +51,75 @@ update msg model =
 
 
 button : Bool -> msg -> String -> Html msg
-button enabled msg text =
+button enabled msg symbol =
   Html.div
     [ Html.class (String.join " " [if enabled then "enabled" else "disabled", "button"])
     ]
   [ Html.img
-      [ Html.src ("img/" ++ text ++ ".png")
+      [ Html.src ("img/" ++ symbol ++ ".png")
       , Events.onClick msg
       ]
     []
   , Html.div []
-    [ Html.text text
+    [ Html.text symbol
     ]
   ]
+
+
+allSymbols : List String
+allSymbols =
+  [ "barht"
+  , "barif"
+  , "bilp"
+  , "blagar"
+  , "buleg"
+  , "dulu"
+  , "frisch"
+  , "muliter"
+  , "ono"
+  , "ragrog"
+  , "rahrt"
+  , "ula"
+  ]
+
+grid : List String
+grid =
+  [ "*** *   * *** "
+  , "*   **  * *  *"
+  , "*** * * * *  *"
+  , "*   *  ** *  *"
+  , "*** *   * *** "
+  ]
+
+gridEnabledness : List (List Bool)
+gridEnabledness =
+  grid
+    |> List.map String.toList
+    |> List.map (List.map (\x -> x == '*'))
+
+gridMessages : List (List Msg)
+gridMessages =
+  grid
+    |> List.map String.toList
+    |> List.map (List.map (\x -> IncreaseYellowCount))
+
+gridSymbols : List (List String)
+gridSymbols =
+  grid
+    |> List.map String.toList
+    |> List.map (List.map2 (\x y -> x) ["barht", "barht", "barht", "blagar", "muliter", "muliter", "muliter", "muliter", "muliter", "dulu", "rahrt", "rahrt", "rahrt", "rahrt"])
+
+gridButtons : List (List (Html Msg))
+gridButtons =
+  List.map3 (List.map3 button) gridEnabledness gridMessages gridSymbols
+
+viewGrid : Html Msg
+viewGrid =
+  gridButtons
+    |> List.map (List.map (\x -> Html.td [] [x]))
+    |> List.map (Html.tr [])
+    |> Html.table []
+
 
 view : Model -> Html Msg
 view model =
@@ -74,6 +130,7 @@ view model =
   , button True  IncreaseYellowCount      "bilp"
   , button True  IncreaseYellowMultiplier "blagar"
   , button True  IncreaseBlackCount       "barif"
+  , viewGrid
   ]
 
 
