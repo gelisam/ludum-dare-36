@@ -6,6 +6,9 @@ import Html.Attributes as Html
 import Html.Events as Events
 import String
 
+import CommentSchedule
+import Html.Extra as Html
+
 
 type alias Model =
   { level : Int
@@ -115,10 +118,37 @@ gridButtons =
 
 viewGrid : Html Msg
 viewGrid =
-  gridButtons
-    |> List.map (List.map (\x -> Html.td [] [x]))
-    |> List.map (Html.tr [])
-    |> Html.table []
+  Html.grid [] gridButtons
+
+
+yellowRectangle : Html msg
+yellowRectangle =
+  Html.div
+    [ Html.class "yellow rectangle"
+    ]
+  []
+
+blankRectangle : Html msg
+blankRectangle =
+  Html.div
+    [ Html.class "blank rectangle"
+    ]
+  []
+
+blackRectangle : Html msg
+blackRectangle =
+  Html.div
+    [ Html.class "black rectangle"
+    ]
+  []
+
+viewYellowRectangles : Model -> Html msg
+viewYellowRectangles model =
+  Html.horizontal []
+  ( List.repeat model.yellowCount yellowRectangle
+ ++ List.repeat (CommentSchedule.maxCount - model.yellowCount - model.blackCount) blankRectangle
+ ++ List.repeat model.blackCount blackRectangle
+  )
 
 
 view : Model -> Html Msg
@@ -130,6 +160,7 @@ view model =
   , button True  IncreaseYellowCount      "bilp"
   , button True  IncreaseYellowMultiplier "blagar"
   , button True  IncreaseBlackCount       "barif"
+  , viewYellowRectangles model
   , viewGrid
   ]
 
