@@ -59,7 +59,7 @@ view model =
   [ button NextLevel                "Next Level"
   , button ResetLevel               "Reset Level"
   , Html.img
-      [ Html.class "enabled_button"
+      [ Html.class "enabled button"
       , Html.src "img/ragrog.png"
       , Events.onClick IncreaseButtonCount
       ]
