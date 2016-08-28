@@ -1,7 +1,6 @@
 module Comments exposing (..)
 
 import Html exposing (Html)
-import Html.App as App
 import Html.Attributes as Html
 
 import CommentSchedule exposing (CommentSchedule, Event)

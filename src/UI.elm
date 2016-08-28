@@ -1,6 +1,5 @@
 module UI exposing (..)
 
-import Debug
 import Html exposing (Html)
 import Html.App as App
 import Html.Attributes as Html

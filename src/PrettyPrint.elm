@@ -1,7 +1,5 @@
 module PrettyPrint exposing (pretty, view)
 
-import Char
-import Debug
 import Html exposing (Html)
 import String
 

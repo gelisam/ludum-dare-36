@@ -1,12 +1,9 @@
 module Game exposing (..)
 
-import Debug
 import Html exposing (Html)
 import Html.App as App
 import Html.Attributes as Html
 import Html.Events as Events
-
-import CommentSchedule
 
 
 type alias Model =
