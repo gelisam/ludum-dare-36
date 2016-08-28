@@ -39,14 +39,17 @@ type CommentSchedule
 lastLevel : Int
 lastLevel = 5
 
-maxCount : Int
-maxCount = 30
+maxYellow : Int
+maxYellow = 30
+
+maxPurple : Int
+maxPurple = 8
 
 half : Int
-half = maxCount // 2
+half = maxYellow // 2
 
 oneThird : Int
-oneThird = maxCount // 3
+oneThird = maxYellow // 3
 
 twoThirds : Int
 twoThirds = 2 * oneThird

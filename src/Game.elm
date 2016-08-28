@@ -121,33 +121,53 @@ viewGrid =
   Html.grid [] gridButtons
 
 
-yellowRectangle : Html msg
-yellowRectangle =
+rectangle : String -> Html msg
+rectangle color =
   Html.div
-    [ Html.class "yellow rectangle"
+    [ Html.class (String.join " " [color, "rectangle"])
     ]
   []
+
+yellowRectangle : Html msg
+yellowRectangle =
+  rectangle "yellow"
+
+purpleRectangle : Html msg
+purpleRectangle =
+  rectangle "purple"
+
+blueRectangle : Html msg
+blueRectangle =
+  rectangle "blue"
 
 blankRectangle : Html msg
 blankRectangle =
-  Html.div
-    [ Html.class "blank rectangle"
-    ]
-  []
+  rectangle "blank"
 
 blackRectangle : Html msg
 blackRectangle =
-  Html.div
-    [ Html.class "black rectangle"
-    ]
-  []
+  rectangle "black"
 
 viewYellowRectangles : Model -> Html msg
 viewYellowRectangles model =
   Html.horizontal []
   ( List.repeat model.yellowCount yellowRectangle
- ++ List.repeat (CommentSchedule.maxCount - model.yellowCount - model.blackCount) blankRectangle
+ ++ List.repeat (CommentSchedule.maxYellow - model.yellowCount - model.blackCount) blankRectangle
  ++ List.repeat model.blackCount blackRectangle
+  )
+
+viewPurpleRectangles : Model -> Html msg
+viewPurpleRectangles model =
+  Html.horizontal []
+  ( List.repeat model.yellowMultiplier purpleRectangle
+ ++ List.repeat (CommentSchedule.maxPurple - model.yellowMultiplier) blankRectangle
+  )
+
+viewBlueRectangles : Model -> Html msg
+viewBlueRectangles model =
+  Html.horizontal []
+  ( List.repeat model.buttonCount blueRectangle
+ ++ List.repeat (3 - model.buttonCount) blankRectangle
   )
 
 
@@ -160,6 +180,8 @@ view model =
   , button True  IncreaseYellowCount      "bilp"
   , button True  IncreaseYellowMultiplier "blagar"
   , button True  IncreaseBlackCount       "barif"
+  , viewBlueRectangles model
+  , viewPurpleRectangles model
   , viewYellowRectangles model
   , viewGrid
   ]
