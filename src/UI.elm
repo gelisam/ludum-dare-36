@@ -53,7 +53,10 @@ view model =
       [ ("margin", "1ex")
       ]
     ]
-  [ Html.div
+  [ Html.h1 []
+    [ Html.text "Dusty Tech Tree"
+    ]
+  , Html.div
       [ Html.style
         [ ("border", "2px solid #888898")
         , ("background-color", "#A9A9B9")
