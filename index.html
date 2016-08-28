@@ -9,19 +9,23 @@
         margin: 0;
         height: 100%;
       }
-      img.button {
+      div.button {
+        width: 64px;
+        text-align: center;
+      }
+      div.button img {
         display: block;
       }
-      img.disabled.button:hover {
-        -webkit-filter: brightness(0.8);
-        filter: brightness(0.8);
+      div.disabled.button img {
+        -webkit-filter: brightness(0.6);
+        filter: brightness(0.6);
       }
-      img.enabled.button:hover {
+      div.enabled.button img:hover {
         -webkit-filter: brightness(1.2);
         filter: brightness(1.2);
         cursor: pointer;
       }
-      img.enabled.button:active {
+      div.enabled.button img:active {
         -webkit-filter: brightness(1.4);
         filter: brightness(1.4);
       }
