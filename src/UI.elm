@@ -52,7 +52,7 @@ evalGameVar model var =
 detectEvent : Game.Model -> Game.Model -> Event -> Bool
 detectEvent game game' event =
   case event of
-    CommentSchedule.Reseting -> False -- TODO
+    CommentSchedule.Reseting -> detectEvent game game' (CommentSchedule.DecreaseIn CommentSchedule.ButtonCount)
     CommentSchedule.Is var value -> evalGameVar game' var == value
     CommentSchedule.IsAbove var value -> evalGameVar game' var > value
     CommentSchedule.IncreaseIn var -> evalGameVar game' var > evalGameVar game var
