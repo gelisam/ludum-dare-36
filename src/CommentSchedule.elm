@@ -65,7 +65,13 @@ commentSchedule =
     WaitFor (IncreaseIn YellowCount) <| Comment "More yellow rectangles." <|
     WaitFor (YellowCount `isAbove` twoThirds) <| Comment "We have a lot of yellow rectangles now! I think we're... winning?" <|
     WaitFor (OneOf [IncreaseIn Level, Reseting]) <| Clear
-  , WaitFor (YellowMultiplier `is` 2) <| Comment "2 times the Bihurax, hurray! What's a Bihurax?" <|
+  , WaitFor (YellowMultiplier `is` 2) <| Comment "Okay, we now have two purple rectangles. What effect does this have?" <|
+    Choice
+    [ (IncreaseIn YellowCount, Comment "Aha! We get two yellow rectangles at a time now." <| Stop)
+    , (IncreaseIn YellowMultiplier, Comment "Okay, we now have many purple rectangles. What effect does this have?" <|
+       WaitFor (IncreaseIn YellowCount) <| Comment "Aha! We get as many new yellow rectangles at a time as we have purple ones." <| Stop)
+    , (Reseting, Clear)
+    ] <|
     WaitFor (OneOf [IncreaseIn YellowMultiplier, IncreaseIn YellowCount, Reseting]) <| Clear
 
   , WaitFor (BlackCount `is` 1) <| Comment "A black rectangle appears." <|
