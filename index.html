@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Dusty Tech Tree</title>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Titillium+Web);
+      html, head, body {
+        margin: 0;
+        height: 100%;
+      }
+      img.disabled_button:hover {
+        -webkit-filter: brightness(0.8);
+        filter: brightness(0.8);
+      }
+      img.enabled_button:hover {
+        -webkit-filter: brightness(1.2);
+        filter: brightness(1.2);
+        cursor: pointer;
+      }
+      img.enabled_button:active {
+        -webkit-filter: brightness(1.4);
+        filter: brightness(1.4);
+      }
+    </style>
+    <script type="text/javascript" src="generated/Main.js"></script>
+  </head>
+  <body style="font-family: 'Titillium Web', sans-serif;">
+    <script>
+      var myapp = Elm.Main.fullscreen();
+    </script>
+  </body>
+</html>

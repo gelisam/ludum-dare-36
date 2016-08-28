@@ -3,6 +3,7 @@ module Game exposing (..)
 import Debug
 import Html exposing (Html)
 import Html.App as App
+import Html.Attributes as Html
 import Html.Events as Events
 
 import CommentSchedule
@@ -52,7 +53,7 @@ update msg model =
 
 
 button : msg -> String -> Html msg
-button msg text = 
+button msg text =
   Html.button [Events.onClick msg] [Html.text text]
 
 view : Model -> Html Msg
@@ -60,7 +61,12 @@ view model =
   Html.div []
   [ button NextLevel                "Next Level"
   , button ResetLevel               "Reset Level"
-  , button IncreaseButtonCount      "Button +1"
+  , Html.img
+      [ Html.class "enabled_button"
+      , Html.src "img/ragrog.png"
+      , Events.onClick IncreaseButtonCount
+      ]
+    []
   , button IncreaseYellowCount      "Yellow +N"
   , button IncreaseYellowMultiplier "N +1"
   , button IncreaseBlackCount       "Black +1"
