@@ -40,10 +40,25 @@ update msg model =
         , comments = Comments.update (detectEvent game game') model.comments
         }
 
+evalGameVar : Game.Model -> CommentSchedule.GameVar -> Int
+evalGameVar model var =
+  case var of
+    CommentSchedule.Level -> model.level
+    CommentSchedule.ButtonCount -> model.buttonCount
+    CommentSchedule.YellowCount -> model.yellowCount
+    CommentSchedule.YellowMultiplier -> model.yellowMultiplier
+    CommentSchedule.BlackCount -> model.blackCount
+
 detectEvent : Game.Model -> Game.Model -> Event -> Bool
-detectEvent _ _ _ =
-  -- TODO
-  False
+detectEvent game game' event =
+  case event of
+    CommentSchedule.Reseting -> False -- TODO
+    CommentSchedule.Is var value -> evalGameVar game' var == value
+    CommentSchedule.IsAbove var value -> evalGameVar game' var > value
+    CommentSchedule.IncreaseIn var -> evalGameVar game' var > evalGameVar game var
+    CommentSchedule.DecreaseIn var -> evalGameVar game' var < evalGameVar game var
+    CommentSchedule.OneOf events -> List.any (detectEvent game game') events
+    CommentSchedule.Never -> False
 
 
 view : Model -> Html Msg

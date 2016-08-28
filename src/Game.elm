@@ -31,7 +31,7 @@ init level =
   , buttonCount = 1
   , yellowCount = 0
   , yellowMultiplier = 1
-  , blackCount = 1
+  , blackCount = 0
   }
 
 update : Msg -> Model -> Model
